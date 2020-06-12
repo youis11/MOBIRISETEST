@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Magical Muffin | Home</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="styles/homestyle_1.css" />
+        <link rel="icon" type="image/png" href="images/LogoMagicalMuffin.png">
+        <link rel="stylesheet" href="styles/navbar.css" />
+    </head>
+    <body>
+        <section>
+          <video src="images/Fizz_vs_Yi.mp4" autoplay="" muted="" loop=""></video>
+        </section>
+        <section>
+          <div class="content">
+            <div class="description">
+              <h1>
+                What is the game about?
+            </h1>
+            <p>
+                In this game players will take the role of Geralt and Yennefer, on their quest to rescue Ciri who’s been kidnapped by Nilfgaard.
+                To increase replayability the game will use rogue-like elements such as passive modifiers that change the player’s abilities. This will be called “relics” and will be objects that when grabbed, will improve one of the existing combos (making it stun, do fire damage, etc.). By shifting what combos do in each game, the player will be incentivized to use different combos, which in the long will traduce into knowledge of what each combo does.
+                The player will end up mastering its character, each time being able to complete their adventure with faster times and better scores.
+            </p>
+            <p>
+                The character's design will demonstrate their combat specialities, exaggerating those things that are more important for it. For example, Geralt’s proportions will be stylized to be able to swing a big sword (the base of his attacks).
+                The environment will also feature stylized art, focusing the attention on the paths the players will take.
+                We’ll use this artstyle to make use of humor, even though we’ll keep the blood and violent combat from the series.
+                The game will feature some levels as dark as the series, although some will have brighter color palettes.
+            </p>
+            </div>
+            <div class="container2">
+                <h2>
+                    CONTROLS
+                </h2>
+                <p>
+                    <ul class="controls">
+                        <li>JOYSTICK: MOVE</li>
+                        <li>X: ATTACK</li>
+                    </ul>
+                </p>
+            </div>
+            </br>
+            <!-- Slideshow container -->
+            <div class="container3">
+              <div class="slideshow-container">
+
+                <!-- Full-width images with number and caption text -->
+                <div class="mySlides fade">
+                <img src="../images/home1.jpg" style="width:100%">
+                <div class="text">Caption Text</div>
+                </div>
+            
+                <div class="mySlides fade">
+                <img src="../images/home.jpg" style="width:100%">
+                <div class="text">Caption Two</div>
+                </div>
+            
+                <div class="mySlides fade">
+                <img src="../images/home2.jpg" style="width:100%">
+                <div class="text">Caption Three</div>
+                </div>
+            
+                <!-- Next and previous buttons -->
+                <a class="_prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="_next" onclick="plusSlides(1)">&#10095;</a>
+              </div>
+            </div>
+
+            <br>
+          
+            <!-- The dots/circles -->
+            <div style="text-align:center">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+            </div>
+          </div>
+        </section>
+
+        <nav role='navigation' id="mainnav">
+            <br><br><br>
+          <ul class="gap">
+            <li><a href="home.html">HOME</a></li>
+            <li><a href="team.html">TEAM</a></li>
+            <li><a href="index.html">RELEASES</a></li>
+            <li><a href="index.html">POSTMORTEM</a></li>
+            <li><a href="index.html">GALLERY</a></li>
+          </ul>
+          <div>
+            <ul class="rrss">
+              <li> <a href="#">some item</a></li>
+              <li> <a href="#">another item</a></li>
+            </ul>
+          </div>
+        </nav>  
+        
+        <div class="hamb">
+          <a href="#"><i class="fa fa-bars"></i></a>
+        </div>
+        
+        <canvas id="bubble"></canvas>
+            <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.3/jquery-ui.js"></script>
+        
+        <script type="text/javascript">
+          let video = document.querySelector('video');
+          window.addEventListener('scroll' , function(){
+            let value = 1 + window.scrollY / -600;
+            video.style.opacity = value;
+          })
+        </script>
+            
+        <script>
+          
+        var w = window.innerWidth,
+            h = window.innerHeight,
+            canvas = document.getElementById('bubble'),
+            ctx = canvas.getContext('2d'),
+            rate = 60,
+            arc = 100,
+            time,
+            count,
+            size = 7,
+            speed = 20,
+            lights = new Array,
+            colors = ['#d59254','#ffffff','#1f2839','#cf7693'];
+        
+        canvas.setAttribute('width',w);
+        canvas.setAttribute('height',h);
+        
+        function init() {
+          time = 0;
+          count = 0;
+        
+          for(var i = 0; i < arc; i++) {
+            lights[i] = {
+              x: Math.ceil(Math.random() * w),
+              y: Math.ceil(Math.random() * h),
+              toX: Math.random() * 5 + 1,
+              toY: Math.random() * 5 + 1,
+              c: colors[Math.floor(Math.random()*colors.length)],
+              size: Math.random() * size
+            }
+          }
+        }
+        
+        function bubble() {
+          ctx.clearRect(0,0,w,h);
+        
+          for(var i = 0; i < arc; i++) {
+            var li = lights[i];
+            
+            ctx.beginPath();
+            ctx.arc(li.x,li.y,li.size,0,Math.PI*2,false);
+            ctx.fillStyle = li.c;
+            ctx.fill();
+            
+            li.x = li.x + li.toX * (time * 0.05);
+            li.y = li.y + li.toY * (time * 0.05);
+            
+            if(li.x > w) { li.x = 0; }
+            if(li.y > h) { li.y = 0; }
+            if(li.x < 0) { li.x = w; }
+            if(li.y < 0) { li.y = h; }
+          }
+          if(time < speed) {
+            time++;
+          }
+          timerID = setTimeout(bubble,1000/rate);
+        }
+        init();
+        bubble(); 
+        
+        //navigation (this is my code)
+        var animation = 'easeOutCubic';
+            delay     = 60;
+        
+        $(document)
+          .on('click', '.fa-bars', function(){
+            var i = 0;
+            $('nav').before($('#bubble'));
+            $('#bubble').fadeIn();
+            $('#mainnav').find('li').each(function(){
+              var that = $(this);
+              i++;
+              (function(i, that){
+                  setTimeout(function(){
+                    that
+                      .animate(
+                        { 'left'   : '20px' }, 
+                        { duration : 350, 
+                          easing   : animation })
+                      .fadeIn({queue: false});
+                  }, delay * i)
+              }(i, that))
+            }); 
+            $('.fa-bars').fadeOut(100,function(){
+              $(this)
+                .removeClass('fa-bars')
+                .addClass('fa-times')
+                .fadeIn(); 
+            });
+          })
+          .on('click', '#bubble, .fa-times', function(){ 
+            $('#bubble').fadeOut();
+            $('#mainnav').find('li')
+              .animate(
+                { 'left'   : '-550px' }, 
+                { duration : 250 })
+              .fadeOut({queue: false});
+            
+            $('.hamb').fadeOut(100, function(){
+              $(this)
+                .find($('i'))
+                .removeClass('fa-times')
+                .addClass('fa-bars')
+                .end()
+                .fadeIn();
+            });
+          }) 
+            
+        </script>
+
+        <script>
+  var slideIndex = 1;
+  showSlides(slideIndex);
+  
+  function plusSlides(n) {
+    showSlides(slideIndex += n);
+  }
+  
+  function currentSlide(n) {
+    showSlides(slideIndex = n);
+  }
+  
+  function showSlides(n) {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    var dots = document.getElementsByClassName("dot");
+    if (n > slides.length) {slideIndex = 1}    
+    if (n < 1) {slideIndex = slides.length}
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+    }
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex-1].style.display = "block";  
+    dots[slideIndex-1].className += " active";
+  }
+        </script>
+    </body>
+</html>
